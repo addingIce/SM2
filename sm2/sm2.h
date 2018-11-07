@@ -1,3 +1,7 @@
+extern "C" {
+#include "miracl.h"
+#include "mirdef.h"
+}
 
 /******************************************************************************
 ¶¨ÒåÍÖÔ²ÇúÏß y^2 = x^3 + ax + b
@@ -22,7 +26,7 @@ Output: private_key[32], pk_x[32], pk_y[32], Za[256]
 Return: null
 Others: 
 *******************************************************************************/
-void key_generate(ECC* ecc, unsigned char* private_key, unsigned char* pk_x, unsigned char *pk_y, unsigned char *Za);
+void key_generate(big p, big a, big b, big n, big x, big y, ECC* ecc, unsigned char* private_key, unsigned char* pk_x, unsigned char *pk_y, unsigned char *Za);
 
 
 /******************************************************************************
@@ -35,7 +39,7 @@ Output: sign_r[32], sign_s[32]
 Return: null
 Others:
 *******************************************************************************/
-void sm2_sign(ECC* ecc, unsigned char *msg, int msg_len, unsigned char *Za, unsigned char* private_key, unsigned char *sign_r, unsigned char *sign_s);
+void sm2_sign(big p, big a, big b, big n, big x, big y, ECC* ecc, unsigned char *msg, int msg_len, unsigned char *Za, unsigned char* private_key, unsigned char *sign_r, unsigned char *sign_s);
 
 
 /******************************************************************************
@@ -48,4 +52,4 @@ Output: null
 Return: 1 if  pass, 0 else
 Others:
 *******************************************************************************/
-int sm2_verify(ECC* ecc, unsigned char *msg, int msg_len, unsigned char *Za, unsigned char  *sign_r, unsigned char *sign_s, unsigned char *pk_x, unsigned char *pk_y);
+int sm2_verify(big p, big a, big b, big n, big x, big y, ECC* ecc, unsigned char *msg, int msg_len, unsigned char *Za, unsigned char  *sign_r, unsigned char *sign_s, unsigned char *pk_x, unsigned char *pk_y);
